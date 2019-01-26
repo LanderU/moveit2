@@ -1,4 +1,6 @@
-<package>
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="2">
   <name>moveit_core</name>
   <version>0.10.8</version>
   <description>Core libraries used by MoveIt!</description>
@@ -16,8 +18,7 @@
   <url type="bugtracker">https://github.com/ros-planning/moveit/issues</url>
   <url type="repository">https://github.com/ros-planning/moveit</url>
 
-  <buildtool_depend>catkin</buildtool_depend>
-  <buildtool_depend>pkg-config</buildtool_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
   <build_depend>assimp</build_depend>
   <build_depend>boost</build_depend>

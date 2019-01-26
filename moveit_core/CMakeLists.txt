@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.5)
 project(moveit_core)
 
 add_compile_options(-std=c++14)
@@ -11,6 +11,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   # This too often has false-positives
   add_compile_options(-Wno-maybe-uninitialized)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -23,6 +24,7 @@ endif()
 find_package(Boost REQUIRED system filesystem date_time thread iostreams)
 find_package(Eigen3 REQUIRED)
 find_package(PkgConfig REQUIRED)
+find_package(ament_cmake REQUIRED)
 
 pkg_check_modules(LIBFCL REQUIRED fcl)
 find_library(LIBFCL_LIBRARIES_FULL ${LIBFCL_LIBRARIES} ${LIBFCL_LIBRARY_DIRS})
@@ -32,7 +34,7 @@ find_package(octomap REQUIRED)
 find_package(urdfdom REQUIRED)
 find_package(urdfdom_headers REQUIRED)
 
-find_package(catkin REQUIRED
+find_package(ament_cmake REQUIRED
 COMPONENTS
   tf2_eigen
   tf2_kdl
