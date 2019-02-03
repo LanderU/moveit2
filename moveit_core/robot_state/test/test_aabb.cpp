@@ -52,7 +52,7 @@
 #endif
 
 #if VISUALIZE_PR2_RVIZ
-#include <ros/ros.h>
+#include "rclcpp/rclcpp.hpp"
 #include <visualization_msgs/Marker.h>
 #include <geometric_shapes/shape_operations.h>
 #endif
