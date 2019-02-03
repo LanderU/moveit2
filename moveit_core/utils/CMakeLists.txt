@@ -2,7 +2,7 @@ set(MOVEIT_LIB_NAME moveit_utils)
 
 add_library(${MOVEIT_LIB_NAME}
   src/lexical_casts.cpp)
-target_link_libraries(${MOVEIT_LIB_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(${MOVEIT_LIB_NAME} ${rclcpp_LIBRARIES} ${rmw_implementation_LIBRARIES} ${Boost_LIBRARIES})
 
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
 
@@ -20,7 +20,7 @@ if(CATKIN_ENABLE_TESTING)
   find_package(moveit_resources REQUIRED)
   include_directories(${moveit_resources_INCLUDE_DIRS})
 
-  target_link_libraries(${MOVEIT_TEST_LIB_NAME} ${catkin_LIBRARIES} ${urdfdom_LIBRARIES} ${urdfdom_headers_LIBRARIES} ${Boost_LIBRARIES})
+  target_link_libraries(${MOVEIT_TEST_LIB_NAME} ${rclcpp_LIBRARIES} ${rmw_implementation_LIBRARIES} ${urdfdom_LIBRARIES} ${urdfdom_headers_LIBRARIES} ${Boost_LIBRARIES})
 
   set_target_properties(${MOVEIT_TEST_LIB_NAME} PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
 
