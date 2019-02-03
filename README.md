@@ -27,6 +27,7 @@ The MoveIt! Motion Planning Framework **for ROS 2.0**
   - [ ] Include moveit_msgs in HRIM (**in progress @ibaiape**)
   - [ ] Convert moveit_core (**in progress @vmayoral**)
     - [ ] Convert all headers and link it to HRIM
+    - [ ] Dependencies on other packages
   - [ ] Convert moveit_kinematics
   - [ ] Convert moveit_planners_ompl
   - [ ] Convert moveit_ros_planning

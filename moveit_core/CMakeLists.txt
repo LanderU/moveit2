@@ -1,26 +1,36 @@
 cmake_minimum_required(VERSION 3.5)
 project(moveit_core)
 
-add_compile_options(-std=c++14)
+# # Warnings
+# add_compile_options(-Wall -Wextra
+#   -Wwrite-strings -Wunreachable-code -Wpointer-arith -Wredundant-decls -Wcast-qual
+#   -Wno-unused-parameter -Wno-unused-function)
+# if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+#   # This too often has false-positives
+#   add_compile_options(-Wno-maybe-uninitialized)
+# elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+#   add_compile_options(-Wall -Wextra -Wpedantic)
+# endif()
 
-# Warnings
-add_compile_options(-Wall -Wextra
-  -Wwrite-strings -Wunreachable-code -Wpointer-arith -Wredundant-decls -Wcast-qual
-  -Wno-unused-parameter -Wno-unused-function)
-if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-  # This too often has false-positives
-  add_compile_options(-Wno-maybe-uninitialized)
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+# Default to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
-  message("${PROJECT_NAME}: You did not request a specific build type: Choosing 'Release' for maximum performance")
-  set(CMAKE_BUILD_TYPE Release)
-endif()
+# if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
+#   message("${PROJECT_NAME}: You did not request a specific build type: Choosing 'Release' for maximum performance")
+#   set(CMAKE_BUILD_TYPE Release)
+# endif()
 
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
 find_package(Boost REQUIRED system filesystem date_time thread iostreams)
 find_package(Eigen3 REQUIRED)
 find_package(PkgConfig REQUIRED)
@@ -33,39 +43,41 @@ set(LIBFCL_LIBRARIES "${LIBFCL_LIBRARIES_FULL}")
 find_package(octomap REQUIRED)
 find_package(urdfdom REQUIRED)
 find_package(urdfdom_headers REQUIRED)
+find_package(ament_cmake REQUIRED)
+find_package(tf2_eigen REQUIRED)
+find_package(tf2_kdl REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
+find_package(eigen_stl_containers REQUIRED)
+find_package(geometric_shapes REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(kdl_parser REQUIRED)
+find_package(moveit_msgs REQUIRED)
+find_package(octomap_msgs REQUIRED)
+find_package(random_numbers REQUIRED)
+find_package(roslib REQUIRED)
+find_package(rostime REQUIRED)
+find_package(rosconsole REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(shape_msgs REQUIRED)
+find_package(srdfdom REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(trajectory_msgs REQUIRED)
+find_package(visualization_msgs REQUIRED)
+find_package(xmlrpcpp REQUIRED)
 
-find_package(ament_cmake REQUIRED
-COMPONENTS
-  tf2_eigen
-  tf2_kdl
-  tf2_geometry_msgs
-  eigen_stl_containers
-  geometric_shapes
-  geometry_msgs
-  kdl_parser
-  moveit_msgs
-  octomap_msgs
-  random_numbers
-  roslib
-  rostime
-  rosconsole
-  sensor_msgs
-  shape_msgs
-  srdfdom
-  std_msgs
-  trajectory_msgs
-  visualization_msgs
-  xmlrpcpp
-)
-
-set(VERSION_FILE_PATH "${CATKIN_DEVEL_PREFIX}/include")
-# Add the folder for the generated version header to the package's
-# exported include dirs to avoid a catkin_lint error.
-# This is how gencpp adds the folder of generated message code to
-# the include dirs, see:
-#   https://github.com/ros/gencpp/blob/e5acaf6/cmake/gencpp-extras.cmake.em#L51-L54
-list(APPEND ${PROJECT_NAME}_INCLUDE_DIRS ${VERSION_FILE_PATH})
-file(MAKE_DIRECTORY "${VERSION_FILE_PATH}/moveit")
+# set(VERSION_FILE_PATH "${CMAKE_PREFIX_PATH}/include")
+# # Add the folder for the generated version header to the package's
+# # exported include dirs to avoid a catkin_lint error.
+# # This is how gencpp adds the folder of generated message code to
+# # the include dirs, see:
+# #   https://github.com/ros/gencpp/blob/e5acaf6/cmake/gencpp-extras.cmake.em#L51-L54
+# # This is empty
+# list(APPEND ${PROJECT_NAME}_INCLUDE_DIRS ${VERSION_FILE_PATH})
+# message(${${PROJECT_NAME}_INCLUDE_DIRS})
+# # /include by default
+# message(${VERSION_FILE_PATH})
+# # file(MAKE_DIRECTORY "${VERSION_FILE_PATH}/moveit")
+# # file(MAKE_DIRECTORY "moveit")
 
 set(THIS_PACKAGE_INCLUDE_DIRS
     background_processing/include
@@ -95,7 +107,7 @@ set(THIS_PACKAGE_INCLUDE_DIRS
     utils/include
 )
 
-catkin_package(
+ament_package(
   INCLUDE_DIRS
     ${THIS_PACKAGE_INCLUDE_DIRS}
   LIBRARIES
@@ -150,8 +162,9 @@ include_directories(SYSTEM ${EIGEN3_INCLUDE_DIRS}
 
 include_directories(${THIS_PACKAGE_INCLUDE_DIRS}
                     ${VERSION_FILE_PATH}
+                    ${rclcpp_INCLUDE_DIRS}
+                    ${rmw_implementation_INCLUDE_DIRS}
                     ${Boost_INCLUDE_DIRS}
-                    ${catkin_INCLUDE_DIRS}
                     ${urdfdom_INCLUDE_DIRS}
                     ${urdfdom_headers_INCLUDE_DIRS}
                     ${OCTOMAP_INCLUDE_DIRS}
