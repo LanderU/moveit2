@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.5)
 project(moveit_core)
 
+if(NOT WIN32)
+  add_definitions(-std=c++11)
+endif()
+
 # # Warnings
 # add_compile_options(-Wall -Wextra
 #   -Wwrite-strings -Wunreachable-code -Wpointer-arith -Wredundant-decls -Wcast-qual
@@ -31,8 +35,18 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(Boost REQUIRED system filesystem date_time thread iostreams)
-find_package(Eigen3 REQUIRED)
+find_package(Boost REQUIRED)
+# find_package(system  REQUIRED)
+# find_package(filesystem  REQUIRED)
+# find_package(date_time  REQUIRED)
+# find_package(thread  REQUIRED)
+# find_package(iostreams REQUIRED)
+
+if(APPLE)
+  find_package(Eigen3 REQUIRED)
+else()
+  find_package(Eigen3 REQUIRED)
+endif()
 find_package(PkgConfig REQUIRED)
 find_package(ament_cmake REQUIRED)
 

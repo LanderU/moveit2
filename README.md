@@ -28,6 +28,8 @@ The MoveIt! Motion Planning Framework **for ROS 2.0**
   - [ ] Convert moveit_core (**in progress @vmayoral**)
     - [ ] Convert all headers and link it to HRIM
     - [ ] Dependencies on other packages
+      - [x] tf2_kdl https://github.com/ros2/geometry2/pull/90
+      - [x] eigen_stl_containers https://github.com/AcutronicRobotics/eigen_stl_containers/tree/ros2
   - [ ] Convert moveit_kinematics
   - [ ] Convert moveit_planners_ompl
   - [ ] Convert moveit_ros_planning
