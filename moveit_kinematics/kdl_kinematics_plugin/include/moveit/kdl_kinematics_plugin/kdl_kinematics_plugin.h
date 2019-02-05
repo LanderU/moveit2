@@ -38,9 +38,9 @@
 #define MOVEIT_ROS_PLANNING_KDL_KINEMATICS_PLUGIN_
 
 // ROS
-#include <ros/ros.h>
-#include <random_numbers/random_numbers.h>
-
+// #include <ros/ros.h>
+#include "rclcpp/rclcpp.hpp"
+#include "random_numbers/random_numbers.h"
 // ROS msgs
 #include <geometry_msgs/PoseStamped.h>
 #include <moveit_msgs/GetPositionFK.h>
