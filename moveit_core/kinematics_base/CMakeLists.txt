@@ -4,10 +4,6 @@ set(MOVEIT_LIB_NAME moveit_kinematics_base)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 add_library(${MOVEIT_LIB_NAME} src/kinematics_base.cpp)
-find_package(ament_cmake REQUIRED)
-find_package(rmw_implementation REQUIRED)
-find_package(urdfdom REQUIRED)
-find_package(Boost REQUIRED)
 
 # set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
 
@@ -26,10 +22,10 @@ find_package(Boost REQUIRED)
 # 										${urdfdom_headers_INCLUDE_DIRS}
 # 										${Boost_INCLUDE_DIRS})
 
-target_link_libraries(${MOVEIT_LIB_NAME} ${rclcpp_LIBRARIES} ${rmw_implementation_LIBRARIES} ${urdfdom_LIBRARIES} ${urdfdom_headers_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(${MOVEIT_LIB_NAME} ${rclcpp_LIBRARIES} ${rmw_implementation_LIBRARIES} ${urdfdom_LIBRARIES} ${urdfdom_headers_LIBRARIES} ${Boost_LIBRARIES} ${common_interfaces_LIBRARIES})
 
-ament_target_dependencies(${MOVEIT_LIB_NAME}
-)
+# ament_target_dependencies(${MOVEIT_LIB_NAME}
+# )
 
 install(TARGETS ${MOVEIT_LIB_NAME}
         LIBRARY DESTINATION lib

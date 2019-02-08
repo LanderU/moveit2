@@ -37,11 +37,12 @@
 #ifndef MOVEIT_KINEMATICS_BASE_KINEMATICS_BASE_
 #define MOVEIT_KINEMATICS_BASE_KINEMATICS_BASE_
 
-#include <geometry_msgs/PoseStamped.h>
-#include <moveit_msgs/MoveItErrorCodes.h>
+#include <hrim_geometry_msgs/msg/pose_stamped.hpp>
+#include <hrim_moveit_msgs/msg/move_it_error_codes.hpp>
 #include <moveit/macros/class_forward.h>
 #include <moveit/macros/deprecation.h>
-#include <ros/node_handle.h>
+// #include <ros/node_handle.h>
+#include "rclcpp/rclcpp.hpp"
 
 #include <boost/function.hpp>
 #include <string>
