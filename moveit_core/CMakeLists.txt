@@ -77,6 +77,9 @@ find_package(srdfdom REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(trajectory_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
+find_package(common_interfaces REQUIRED)
+find_package(hrim_geometry_msgs REQUIRED)
+find_package(hrim_moveit_msgs REQUIRED)
 # find_package(xmlrpcpp REQUIRED)
 
 set(VERSION_FILE_PATH "/home/erle/myfiles/moveitcore/build/moveit_core/include")
@@ -110,7 +113,7 @@ set(THIS_PACKAGE_INCLUDE_DIRS
     # robot_state/include
     # robot_trajectory/include
     # kinematic_constraints/include
-    # macros/include
+    macros/include
     # planning_interface/include
     # planning_request_adapter/include
     # planning_scene/include
@@ -193,6 +196,9 @@ LIBFCL
 OCTOMAP
 urdfdom
 urdfdom_headers
+common_interfaces
+hrim_geometry_msgs
+hrim_moveit_msgs
 )
 
 ament_export_dependencies(dependencies)
@@ -209,6 +215,8 @@ include_directories(${THIS_PACKAGE_INCLUDE_DIRS}
                     ${urdfdom_INCLUDE_DIRS}
                     ${urdfdom_headers_INCLUDE_DIRS}
                     ${OCTOMAP_INCLUDE_DIRS}
+										${hrim_geometry_msgs_INCLUDE_DIRS}
+										${hrim_moveit_msgs_INCLUDE_DIRS}
                     )
 
 # Generate and install version.h
@@ -226,12 +234,12 @@ configure_file("version/version.h.in" "${VERSION_FILE_PATH}/moveit/version.h")
 install(FILES "${VERSION_FILE_PATH}/moveit/version.h" DESTINATION include/${PROJECT_NAME}/moveit)
 
 add_subdirectory(version)
-# add_subdirectory(macros)
+add_subdirectory(macros)
 # add_subdirectory(backtrace)
 # add_subdirectory(exceptions)
 # add_subdirectory(profiler)
 # add_subdirectory(background_processing)
-	# add_subdirectory(kinematics_base)
+add_subdirectory(kinematics_base)
 # add_subdirectory(controller_manager)
 # add_subdirectory(sensor_manager)
 	# add_subdirectory(robot_model)
