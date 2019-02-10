@@ -21,7 +21,7 @@ The MoveIt! Motion Planning Framework **for ROS 2.0**
     - [ ] OS X 10.14
 - [ ] Update/setup infrastructure for development
   - [x] Delete metapackages
-  - [ ] Upgrade continuous integration for ROS 2.0
+  - [ ] Upgrade continuous integration for ROS 2.0 @LanderU
   - [ ] Refactor/cleanup folder hierarchy
 - [ ] Convert moveit packages to ROS 2.0
   - [ ] Include moveit_msgs in HRIM (**in progress @ibaiape**)
