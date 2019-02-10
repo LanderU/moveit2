@@ -1,8 +1,10 @@
-# moveit/moveit:melodic-ci
-# Sets up a base image to use for running Continuous Integration on Travis
+FROM ros:crystal-ros-base-bionic
 
-FROM osrf/ros2:bouncy-ros-base
-MAINTAINER Lander Usategui  lander@erlerobotics.com
+MAINTAINER Lander Usategui  <lander@erlerobotics.com>
+
+RUN apt-get update && apt-get install -y \
+    python3-colcon-common-extensions \
+    && rm -rf /var/lib/apt/lists/*
 
 # Setup ROS2 workspace
 RUN mkdir -p ros2_ws/src
